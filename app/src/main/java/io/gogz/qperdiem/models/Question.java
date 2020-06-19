@@ -61,4 +61,8 @@ public class Question {
     public void setIcon(String icon) {
         this.icon = icon;
     }
+
+    public void addContext(Context context){
+        this.contexts.add(context);
+    }
 }

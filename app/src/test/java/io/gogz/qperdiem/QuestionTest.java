@@ -3,6 +3,7 @@ package io.gogz.qperdiem;
 import org.junit.Before;
 import org.junit.Test;
 
+import io.gogz.qperdiem.models.Context;
 import io.gogz.qperdiem.models.Question;
 
 import static org.junit.Assert.assertEquals;
@@ -56,5 +57,12 @@ public class QuestionTest {
     @Test
     public void hasEmptyContextsArray() {
         assertEquals(0, question.getContexts().size());
+    }
+
+    @Test
+    public void canAddContext() {
+        Context context = new Context("name", "bulb");
+        this.question.addContext(context);
+        assertEquals(1, question.getContexts().size());
     }
 }
