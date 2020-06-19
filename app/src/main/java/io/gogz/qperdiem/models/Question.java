@@ -11,9 +11,9 @@ public class Question {
     private boolean active;
     private String icon;
 
-    public Question(String text, boolean active, String icon) {
+    public Question(String text, String icon) {
         this.text = text;
-        this.active = active;
+        this.active = true;
         this.icon = icon;
         this.ratings = new ArrayList<>();
         this.contexts = new ArrayList<>();
