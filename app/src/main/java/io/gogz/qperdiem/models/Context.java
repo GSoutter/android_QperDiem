@@ -51,4 +51,8 @@ public class Context {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public void addQuestion(Question question) {
+        this.questions.add(question);
+    }
 }
