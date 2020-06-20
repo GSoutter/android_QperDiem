@@ -12,7 +12,7 @@ public class QuestionWithRatings {
     @Embedded public Question question;
 
     @Relation(
-            parentColumn = "roomQuestionId",
+            parentColumn = "id",
             entityColumn = "roomQuestionReaId"
     )
     public List<Rating> ratings;

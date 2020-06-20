@@ -3,11 +3,11 @@ package io.gogz.qperdiem.room_db;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "room_question")
+@Entity(tableName = "questions")
 public class Question {
 
     @PrimaryKey
-    public long roomQuestionId;
+    public long id;
     public String text;
     //   List<Rating> ratings; moved to a separated entity
     //   List<Context> contexts moved to a separate entity  ;
