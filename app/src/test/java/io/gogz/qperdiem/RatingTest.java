@@ -37,7 +37,6 @@ public class RatingTest {
     }
     @Test
     public void cansetQuestion() {
-        Question question2 = new Question("I do my best?", "metime");
 
         rating.setQuestion(question2);
         assertEquals("I do my best?", rating.getQuestion().getText());

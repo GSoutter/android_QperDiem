@@ -1,9 +1,13 @@
 package io.gogz.qperdiem.models;
 
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
+
+    @PrimaryKey private long questionId;
 
     private String text;
     private List<Rating> ratings;
@@ -20,6 +24,14 @@ public class Question {
     }
 
     public Question() {
+    }
+
+    public long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(long questionId) {
+        this.questionId = questionId;
     }
 
     public String getText() {
@@ -65,6 +77,5 @@ public class Question {
     public void addContext(Context context){
         this.contexts.add(context);
     }
-
 
 }

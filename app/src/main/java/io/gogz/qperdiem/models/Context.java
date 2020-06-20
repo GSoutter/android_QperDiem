@@ -1,9 +1,15 @@
 package io.gogz.qperdiem.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity(tableName = "contexts")
 public class Context {
+
+    @PrimaryKey private long contextId;
 
     private String name;
     private String icon;
@@ -18,6 +24,14 @@ public class Context {
     }
 
     public Context() {
+    }
+
+    public long getContextId() {
+        return contextId;
+    }
+
+    public void setContextId(long contextId) {
+        this.contextId = contextId;
     }
 
     public String getName() {

@@ -1,8 +1,16 @@
 package io.gogz.qperdiem.models;
 
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "ratings")
 public class Rating {
 
+    @PrimaryKey private long ratingId;
+
     private String date;
+
     private Question question;
 
     public Rating(String date, Question question) {
@@ -10,7 +18,12 @@ public class Rating {
         this.question = question;
     }
 
-    public Rating() {
+    public long getRatingId() {
+        return ratingId;
+    }
+
+    public void setRatingId(long ratingId) {
+        this.ratingId = ratingId;
     }
 
     public String getDate() {
