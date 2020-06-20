@@ -1,15 +1,10 @@
-package io.gogz.qperdiem.room;
+package io.gogz.qperdiem.room_db;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.List;
-
-import io.gogz.qperdiem.models.Context;
-import io.gogz.qperdiem.models.Rating;
-
 @Entity(tableName = "room_question")
-public class roomQuestion {
+public class Question {
 
     @PrimaryKey
     public long roomQuestionId;

@@ -1,19 +1,19 @@
-package io.gogz.qperdiem.room;
+package io.gogz.qperdiem.room_db;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
 import java.util.List;
 
-import io.gogz.qperdiem.models.Question;
-import io.gogz.qperdiem.models.Rating;
+import io.gogz.qperdiem.room_db.Question;
+import io.gogz.qperdiem.room_db.Rating;
 
-public class roomQuestionWithRatings {
+public class QuestionWithRatings {
     @Embedded public Question question;
 
     @Relation(
             parentColumn = "roomQuestionId",
-            entityColumn = "roomQuestionRatingId"
+            entityColumn = "roomQuestionReaId"
     )
     public List<Rating> ratings;
 
