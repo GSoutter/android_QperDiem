@@ -15,6 +15,7 @@ import java.util.concurrent.Executors;
 public abstract class QuestionsRoomDatabase extends RoomDatabase {
 
     public abstract QuestionWithRatingsDao questionWithRatingsDao();
+    public abstract QuestionDao questionDao();
 
     private static volatile QuestionsRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
