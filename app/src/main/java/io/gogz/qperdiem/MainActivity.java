@@ -22,10 +22,10 @@ import java.util.List;
 
 import io.gogz.qperdiem.room_db.Question;
 import io.gogz.qperdiem.room_db.QuestionListAdapter;
-import io.gogz.qperdiem.room_db.QuestionWithRatingListAdapter;
+//import io.gogz.qperdiem.room_db.QuestionWithRatingListAdapter;
 import io.gogz.qperdiem.room_db.QuestionViewModel;
-import io.gogz.qperdiem.room_db.QuestionWithRatings;
-import io.gogz.qperdiem.room_db.QuestionWithRatingsViewModel;
+//import io.gogz.qperdiem.room_db.QuestionWithRatings;
+//import io.gogz.qperdiem.room_db.QuestionWithRatingsViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable final List<Question> questions) {
                 // Update the cached copy of the questions in the adapter.
+
                 adapter.setQuestions(questions);
+
             }
         });
 

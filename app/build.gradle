@@ -19,12 +19,17 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            resValue("string", "DB_PASSWORD_PERSON", "password")
+        }
     }
 
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+
+
 }
 
 dependencies {
@@ -56,5 +61,10 @@ dependencies {
 // Testing
     def coreTestingVersion = '2.1.0'
     androidTestImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+
+// Debugging database using Android Debug Database
+    debugImplementation 'com.amitshekhar.android:debug-db-encrypt:1.0.6'
 }
+
+
 

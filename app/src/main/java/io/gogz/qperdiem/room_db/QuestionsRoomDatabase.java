@@ -11,10 +11,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {QuestionWithRatings.class}, version =1, exportSchema = false)
+@Database(entities = {Question.class}, version =1, exportSchema = false)
 public abstract class QuestionsRoomDatabase extends RoomDatabase {
 
-    public abstract QuestionWithRatingsDao questionWithRatingsDao();
+//    public abstract QuestionWithRatingsDao questionWithRatingsDao();
     public abstract QuestionDao questionDao();
 
     private static volatile QuestionsRoomDatabase INSTANCE;
