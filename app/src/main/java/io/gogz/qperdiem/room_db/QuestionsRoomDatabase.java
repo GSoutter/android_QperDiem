@@ -47,15 +47,15 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
-                QuestionWithRatingsDao dao = INSTANCE.questionWithRatingsDao();
+                QuestionDao dao = INSTANCE.questionDao();
                 dao.deleteAll();
 
                 Question question = new Question();
                 question.text = "God damn I hope this works.";
                 dao.insertQuestion(question);
+
                 question = new Question();
                 question.text = "I really really really hope it does";
-
                 dao.insertQuestion(question);
             });
         }
