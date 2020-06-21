@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import io.gogz.qperdiem.room_db.Question;
+import io.gogz.qperdiem.room_db.QuestionListAdapter;
 import io.gogz.qperdiem.room_db.QuestionWithRatingListAdapter;
 import io.gogz.qperdiem.room_db.QuestionViewModel;
 import io.gogz.qperdiem.room_db.QuestionWithRatings;
@@ -37,17 +38,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final QuestionWithRatingListAdapter adapter = new QuestionWithRatingListAdapter(this);
+        final QuestionListAdapter adapter = new QuestionListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        mQuestionViewModel = new ViewModelProvider(this).get(QuestionWithRatingsViewModel.class);
+        mQuestionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
 
-        mQuestionViewModel.getAllQuestions().observe(this, new Observer<List<QuestionWithRatings>>() {
+        mQuestionViewModel.getQuestions().observe(this, new Observer<List<Question>>() {
             @Override
-            public void onChanged(@Nullable final List<QuestionWithRatings> questions) {
+            public void onChanged(@Nullable final List<Question> questions) {
                 // Update the cached copy of the questions in the adapter.
                 adapter.setQuestions(questions);
             }
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == NEW_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Question question = new Question();
             question.text = data.getStringExtra(NewQuestionActivity.EXTRA_REPLY);
-            mQuestionsViewModel.insert(question);
+            mQuestionViewModel.insert(question);
         } else {
             Toast.makeText(
                     getApplicationContext(),
