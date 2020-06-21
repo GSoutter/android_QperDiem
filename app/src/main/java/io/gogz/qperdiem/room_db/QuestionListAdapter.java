@@ -42,7 +42,7 @@ public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapte
         }
     }
 
-    void setQuestions(List<QuestionWithRatings> questions){
+    public void setQuestions(List<QuestionWithRatings> questions){
         mQuestions = questions;
         notifyDataSetChanged();
     }

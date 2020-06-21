@@ -19,7 +19,7 @@ public class QuestionWithRatingsViewModel extends AndroidViewModel {
 
     }
 
-    LiveData<List<QuestionWithRatings>> getAllQuestions() {
+    public LiveData<List<QuestionWithRatings>> getAllQuestions() {
         return mAllQuestions;
     }
 
