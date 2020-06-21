@@ -21,7 +21,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import io.gogz.qperdiem.room_db.Question;
-import io.gogz.qperdiem.room_db.QuestionRatingListAdapter;
+import io.gogz.qperdiem.room_db.QuestionWithRatingListAdapter;
 import io.gogz.qperdiem.room_db.QuestionViewModel;
 import io.gogz.qperdiem.room_db.QuestionWithRatings;
 import io.gogz.qperdiem.room_db.QuestionWithRatingsViewModel;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final QuestionRatingListAdapter adapter = new QuestionRatingListAdapter(this);
+        final QuestionWithRatingListAdapter adapter = new QuestionWithRatingListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        Toolbar toolbar = findViewById(R.id.toolbar);

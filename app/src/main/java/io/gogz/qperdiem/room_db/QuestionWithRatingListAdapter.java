@@ -12,7 +12,7 @@ import java.util.List;
 
 import io.gogz.qperdiem.R;
 
-public class QuestionRatingListAdapter extends RecyclerView.Adapter<QuestionRatingListAdapter.QuestionViewHolder> {
+public class QuestionWithRatingListAdapter extends RecyclerView.Adapter<QuestionWithRatingListAdapter.QuestionViewHolder> {
 
     class QuestionViewHolder extends RecyclerView.ViewHolder {
         private final TextView questionItemView;
@@ -26,7 +26,7 @@ public class QuestionRatingListAdapter extends RecyclerView.Adapter<QuestionRati
     private final LayoutInflater mInflater;
     private List<QuestionWithRatings> mQuestions;
 
-    public QuestionRatingListAdapter(Context context) {mInflater = LayoutInflater.from(context);}
+    public QuestionWithRatingListAdapter(Context context) {mInflater = LayoutInflater.from(context);}
 
     @Override
     public QuestionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
