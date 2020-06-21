@@ -10,6 +10,7 @@ public class Rating {
     @PrimaryKey
     public long id;
     public float score;
+    public long questionId;
 
 
 }

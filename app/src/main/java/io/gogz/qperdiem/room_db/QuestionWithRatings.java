@@ -9,7 +9,6 @@ import java.util.List;
 import io.gogz.qperdiem.room_db.Question;
 import io.gogz.qperdiem.room_db.Rating;
 
-@Entity
 public class QuestionWithRatings {
     @Embedded public Question question;
 
