@@ -17,9 +17,14 @@ public interface QuestionWithRatingsDao {
     @Query("SELECT * FROM questions")
     public LiveData<List<QuestionWithRatings>> getQuestionsWithRatings();
 
+    @Transaction
+    @Query("DELETE FROM questions")
+    void deleteAll();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertQuestion(Question...questions);
 
+    @Transaction
     @Delete
-    public void deleteUser(Question...questions);
+    public void deleteQuestion(Question...questions);
 }

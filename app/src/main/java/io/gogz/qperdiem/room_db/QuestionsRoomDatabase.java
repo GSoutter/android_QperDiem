@@ -2,9 +2,11 @@ package io.gogz.qperdiem.room_db;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,10 +27,37 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             QuestionsRoomDatabase.class, "qperdiem_database")
+                            .addCallback(sRoomDatabaseCallback)
                             .build();
                 }
             }
         }
         return INSTANCE;
     }
+
+
+    private static RoomDatabase.Callback sRoomDatabaseCallback = new RoomDatabase.Callback() {
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {
+            super.onOpen(db);
+
+            // If you want to keep data through app restarts,
+            // comment out the following block
+            databaseWriteExecutor.execute(() -> {
+                // Populate the database in the background.
+                // If you want to start with more words, just add them.
+                QuestionWithRatingsDao dao = INSTANCE.questionWithRatingsDao();
+                dao.deleteAll();
+
+                Question question = new Question();
+                question.text = "God damn I hope this works.";
+                dao.insertQuestion(question);
+                question = new Question();
+                question.text = "I really really really hope it does";
+
+                dao.insertQuestion(question);
+            });
+        }
+    };
+
 }

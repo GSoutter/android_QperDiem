@@ -11,4 +11,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="add_word" />
     <string name="add_question" />
+
+
+    <string name="hint_question">Question..</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Question not saved because it is empty.</string>
 </resources>

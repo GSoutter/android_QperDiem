@@ -1,4 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="big_padding" />
+    <dimen name="min_height" />
 </resources>
