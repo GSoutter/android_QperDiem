@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,13 +21,14 @@ import android.widget.Toast;
 import java.util.List;
 
 import io.gogz.qperdiem.room_db.Question;
-import io.gogz.qperdiem.room_db.QuestionListAdapter;
+import io.gogz.qperdiem.room_db.QuestionRatingListAdapter;
+import io.gogz.qperdiem.room_db.QuestionViewModel;
 import io.gogz.qperdiem.room_db.QuestionWithRatings;
 import io.gogz.qperdiem.room_db.QuestionWithRatingsViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private QuestionWithRatingsViewModel mQuestionsViewModel;
+    private QuestionViewModel mQuestionViewModel;
     public static final int NEW_QUESTION_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
@@ -38,15 +37,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final QuestionListAdapter adapter = new QuestionListAdapter(this);
+        final QuestionRatingListAdapter adapter = new QuestionRatingListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        mQuestionsViewModel = new ViewModelProvider(this).get(QuestionWithRatingsViewModel.class);
+        mQuestionViewModel = new ViewModelProvider(this).get(QuestionWithRatingsViewModel.class);
 
-        mQuestionsViewModel.getAllQuestions().observe(this, new Observer<List<QuestionWithRatings>>() {
+        mQuestionViewModel.getAllQuestions().observe(this, new Observer<List<QuestionWithRatings>>() {
             @Override
             public void onChanged(@Nullable final List<QuestionWithRatings> questions) {
                 // Update the cached copy of the questions in the adapter.
