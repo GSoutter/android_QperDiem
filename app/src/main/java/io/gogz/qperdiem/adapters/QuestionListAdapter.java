@@ -1,4 +1,4 @@
-package io.gogz.qperdiem.room_db;
+package io.gogz.qperdiem.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import io.gogz.qperdiem.R;
+import io.gogz.qperdiem.room_db.Question;
 
 public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapter.QuestionViewHolder> {
 

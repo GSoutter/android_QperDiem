@@ -61,7 +61,7 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
 
                 question = new Question();
                 question.text = "I really really really hope it does";
-                dao.insertQuestion(question);
+                question.questionId = dao.insertQuestion(question);
 
                 Rating rating = question.addRating(4);
                 rDao.insert(rating);

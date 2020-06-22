@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_add_ratings"
+        android:icon="@android:drawable/ic_menu_day"
+        android:title="@string/title_add_ratings" />
+
+    <item
+        android:id="@+id/navigation_view_questions"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/title_view_questions" />
+
+    <item
+        android:id="@+id/navigation_view_contexts"
+        android:icon="@drawable/ic_baseline_alternate_email_24"
+        android:title="@string/title_view_contexts" />
+
+</menu>

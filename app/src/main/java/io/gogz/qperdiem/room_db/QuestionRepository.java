@@ -12,7 +12,7 @@ public class QuestionRepository {
     private LiveData<List<Question>> mAllQuestions;
 
 
-    QuestionRepository(Application application) {
+    public QuestionRepository(Application application) {
         QuestionsRoomDatabase db = QuestionsRoomDatabase.getDatabase(application);
         this.mQuestionDao = db.questionDao();
         this.mAllQuestions = mQuestionDao.getQuestions();
@@ -20,13 +20,13 @@ public class QuestionRepository {
 
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    LiveData<List<Question>> getQuestions() {
+    public LiveData<List<Question>> getQuestions() {
         return mAllQuestions;
     }
 
     // You must call this on a non-UI thread or your app will throw an exception. Room ensures
     // that you're not doing any long running operations on the main thread, blocking the UI.
-    void insert(Question question) {
+    public void insert(Question question) {
         QuestionsRoomDatabase.databaseWriteExecutor.execute(() -> {
             mQuestionDao.insertQuestion(question);
         });

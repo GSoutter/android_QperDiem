@@ -21,9 +21,9 @@ import android.widget.Toast;
 import java.util.List;
 
 import io.gogz.qperdiem.room_db.Question;
-import io.gogz.qperdiem.room_db.QuestionListAdapter;
+import io.gogz.qperdiem.adapters.QuestionListAdapter;
 //import io.gogz.qperdiem.room_db.QuestionWithRatingListAdapter;
-import io.gogz.qperdiem.room_db.QuestionViewModel;
+import io.gogz.qperdiem.viewmodels.QuestionViewModel;
 //import io.gogz.qperdiem.room_db.QuestionWithRatings;
 //import io.gogz.qperdiem.room_db.QuestionWithRatingsViewModel;
 

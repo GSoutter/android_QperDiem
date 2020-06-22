@@ -1,4 +1,4 @@
-package io.gogz.qperdiem.room_db;
+package io.gogz.qperdiem.viewmodels;
 
 import android.app.Application;
 
@@ -6,6 +6,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+
+import io.gogz.qperdiem.room_db.Question;
+import io.gogz.qperdiem.room_db.QuestionRepository;
 
 public class QuestionViewModel extends AndroidViewModel {
     private QuestionRepository mRepository;

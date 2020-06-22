@@ -16,4 +16,11 @@
     <string name="hint_question">Question..</string>
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Question not saved because it is empty.</string>
+    <string name="title_activity_bottom_nav">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_add_ratings">Review</string>
+    <string name="title_view_questions">Questions</string>
+    <string name="title_view_contexts">Contexts</string>
 </resources>
