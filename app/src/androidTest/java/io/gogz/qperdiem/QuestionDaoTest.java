@@ -113,6 +113,5 @@ public class QuestionDaoTest {
         assertEquals(allQuestionsWithRatings.get(0).question.text, question.text);
         assertEquals(allQuestionsWithRatings.get(0).ratings.get(0).score, rating.score, 0.1);
 
-
     }
 }
