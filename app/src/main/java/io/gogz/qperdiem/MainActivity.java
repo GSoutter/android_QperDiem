@@ -3,10 +3,14 @@ package io.gogz.qperdiem;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +27,7 @@ import java.util.List;
 import io.gogz.qperdiem.room_db.Question;
 import io.gogz.qperdiem.adapters.QuestionListAdapter;
 //import io.gogz.qperdiem.room_db.QuestionWithRatingListAdapter;
+import io.gogz.qperdiem.ui.home.HomeFragment;
 import io.gogz.qperdiem.viewmodels.QuestionViewModel;
 //import io.gogz.qperdiem.room_db.QuestionWithRatings;
 //import io.gogz.qperdiem.room_db.QuestionWithRatingsViewModel;
@@ -37,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+        BottomNavigationView bottomNav = findViewById(R.id.nav_view);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+        //sets bas
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new FragmentQuestions()).commit();
+
+
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final QuestionListAdapter adapter = new QuestionListAdapter(this);
         recyclerView.setAdapter(adapter);
@@ -50,12 +65,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable final List<Question> questions) {
                 // Update the cached copy of the questions in the adapter.
-
                 adapter.setQuestions(questions);
-
             }
         });
 
+        // Floating Action Button coding
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +81,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    // Bottom navigation bar navigation bar switching code.
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                    Fragment selectedFragment = null;
+                    switch (menuItem.getItemId()){
+                        case R.id.navigation_add_ratings:
+                            selectedFragment = new FragmentRatings();
+                            break;
+
+                            case R.id.navigation_view_questions:
+                            selectedFragment = new FragmentQuestions();
+                            break;
+
+                            case R.id.navigation_view_contexts:
+                            selectedFragment = new FragmentContexts();
+                            break;
+                    }
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                    return true;
+                }
+            };
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
