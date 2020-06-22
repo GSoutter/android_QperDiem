@@ -11,13 +11,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Question.class, Rating.class, ContextQ.class}, version =1, exportSchema = false)
+@Database(entities = {Question.class, Rating.class, ContextQ.class, QuestionContextCrossRef.class}, version =1, exportSchema = false)
 public abstract class QuestionsRoomDatabase extends RoomDatabase {
 
 //    public abstract QuestionWithRatingsDao questionWithRatingsDao();
     public abstract QuestionDao questionDao();
     public abstract RatingDao ratingDao();
     public abstract ContextQDao contextQDao();
+    public abstract QuestionContextCrossRefDao questionContextCrossRefDao();
 
     private static volatile QuestionsRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;

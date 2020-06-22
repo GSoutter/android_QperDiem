@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "contexts")
 public class ContextQ {
-    @PrimaryKey(autoGenerate = true) public long id;
+    @PrimaryKey(autoGenerate = true) public long contextId;
     public String name;
     public String icon;
     //  List<Question> is moved to separate entity

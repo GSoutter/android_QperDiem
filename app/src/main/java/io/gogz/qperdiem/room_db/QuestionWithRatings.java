@@ -14,7 +14,7 @@ public class QuestionWithRatings {
     @Embedded public Question question;
 
     @Relation(
-            parentColumn = "id",
+            parentColumn = "questionId",
             entityColumn = "questionId",
             entity = Rating.class
     )

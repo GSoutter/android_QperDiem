@@ -29,4 +29,10 @@ public interface QuestionDao {
     @Transaction
     @Query("Select * from questions")
     public LiveData<List<QuestionWithRatings>> getQuestionsWithRatings();
+
+    @Transaction
+    @Query("Select * from questions")
+    public LiveData<List<QuestionWithContexts>> getQuestionsWithContexts();
+
+
 }
