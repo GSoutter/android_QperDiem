@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +26,6 @@ import java.util.List;
 import io.gogz.qperdiem.room_db.Question;
 import io.gogz.qperdiem.adapters.QuestionListAdapter;
 //import io.gogz.qperdiem.room_db.QuestionWithRatingListAdapter;
-import io.gogz.qperdiem.ui.home.HomeFragment;
 import io.gogz.qperdiem.viewmodels.QuestionViewModel;
 //import io.gogz.qperdiem.room_db.QuestionWithRatings;
 //import io.gogz.qperdiem.room_db.QuestionWithRatingsViewModel;
@@ -47,17 +45,15 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.nav_view);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
-        //sets bas
+        //initial fragment
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new FragmentQuestions()).commit();
+                new FragmentRatings()).commit();
 
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final QuestionListAdapter adapter = new QuestionListAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
         mQuestionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
 
@@ -80,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
             }
         });
+
+
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
     }
 
 
