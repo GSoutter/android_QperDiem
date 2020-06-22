@@ -11,22 +11,18 @@ import androidx.room.Transaction;
 import java.util.List;
 
 @Dao
-public interface QuestionDao {
-    @Query("SELECT * FROM questions")
-    public LiveData<List<Question>> getQuestions();
+public interface RatingDao {
+    @Query("SELECT * FROM ratings")
+    public LiveData<List<Rating>> getRatings();
 
     @Transaction
-    @Query("DELETE FROM questions")
+    @Query("DELETE FROM ratings")
     void deleteAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public long insertQuestion(Question question);
+    public void insert(Rating...ratings);
 
     @Transaction
     @Delete
-    public void deleteQuestion(Question...questions);
-
-    @Transaction
-    @Query("Select * from questions")
-    public LiveData<List<QuestionWithRatings>> getQuestionsWithRatings();
+    public void delete(Rating...ratings);
 }

@@ -17,7 +17,10 @@ import java.util.List;
 
 import io.gogz.qperdiem.room_db.Question;
 import io.gogz.qperdiem.room_db.QuestionDao;
+import io.gogz.qperdiem.room_db.QuestionWithRatings;
 import io.gogz.qperdiem.room_db.QuestionsRoomDatabase;
+import io.gogz.qperdiem.room_db.Rating;
+import io.gogz.qperdiem.room_db.RatingDao;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
@@ -30,6 +33,7 @@ public class QuestionDaoTest {
 
     private QuestionDao mQuestionDao;
     private QuestionsRoomDatabase mDb;
+    private RatingDao mRatingDao;
 
     @Before
     public void createDb() {
@@ -41,6 +45,7 @@ public class QuestionDaoTest {
                 .allowMainThreadQueries()
                 .build();
         mQuestionDao = mDb.questionDao();
+        mRatingDao = mDb.ratingDao();
     }
 
     @After
@@ -87,5 +92,27 @@ public class QuestionDaoTest {
         mQuestionDao.deleteAll();
         List<Question> allWords = LiveDataTestUtil.getValue(mQuestionDao.getQuestions());
         assertTrue(allWords.isEmpty());
+    }
+
+    @Test
+    public void canGetQuestionWithRatings() throws Exception {
+        Question question = new Question();
+        question.text = "words";
+        question.id = mQuestionDao.insertQuestion(question);
+
+        Question question2 = new Question();
+        question2.text = "words2";
+        question2.id = mQuestionDao.insertQuestion(question2);
+
+        Rating rating = question.addRating(4);
+        mRatingDao.insert(rating);
+
+        List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
+
+//        List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
+        assertEquals(allQuestionsWithRatings.get(0).question.text, question.text);
+        assertEquals(allQuestionsWithRatings.get(0).ratings.get(0).score, rating.score, 0.1);
+
+
     }
 }

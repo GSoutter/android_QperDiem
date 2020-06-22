@@ -3,6 +3,8 @@ package io.gogz.qperdiem.room_db;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
 @Entity(tableName = "questions")
 public class Question {
 
@@ -14,5 +16,14 @@ public class Question {
     public boolean active;
     public String icon;
     public String test;
+
+
+    public Rating addRating(float score){
+        Rating rating = new Rating();
+        rating.score = score;
+        rating.questionId = this.id;
+        rating.date = "tuesday rating";
+        return rating;
+    }
 
 }

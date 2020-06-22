@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "ratings")
 public class Rating {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     public long id;
     public float score;
     public long questionId;
-
+    public String date;
 
 }

@@ -11,11 +11,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Question.class}, version =1, exportSchema = false)
+@Database(entities = {Question.class, Rating.class}, version =1, exportSchema = false)
 public abstract class QuestionsRoomDatabase extends RoomDatabase {
 
 //    public abstract QuestionWithRatingsDao questionWithRatingsDao();
     public abstract QuestionDao questionDao();
+    public abstract RatingDao ratingDao();
 
     private static volatile QuestionsRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -49,6 +50,8 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
                 // If you want to start with more words, just add them.
                 QuestionDao dao = INSTANCE.questionDao();
                 dao.deleteAll();
+                RatingDao rDao = INSTANCE.ratingDao();
+                rDao.deleteAll();
 
                 Question question = new Question();
                 question.text = "God damn I hope this works.";
@@ -57,6 +60,9 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
                 question = new Question();
                 question.text = "I really really really hope it does";
                 dao.insertQuestion(question);
+
+                Rating rating = question.addRating(4);
+                rDao.insert(rating);
             });
         }
     };
