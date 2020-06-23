@@ -33,6 +33,7 @@ public class FragmentQuestions extends Fragment implements QuestionListAdapter.O
     private static final String TAG = "FragmentQuestions";
     private QuestionViewModel mQuestionViewModel;
     public static final int NEW_QUESTION_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_QUESTION_ACTIVITY_REQUEST_CODE = 2;
 
     @Nullable
     @Override
@@ -76,7 +77,17 @@ public class FragmentQuestions extends Fragment implements QuestionListAdapter.O
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NEW_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+        if (requestCode == EDIT_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            Question question = new Question();
+            question.text = data.getStringExtra("questionText");
+            question.questionId = data.getLongExtra("questionId", 0);
+            if (data.getBooleanExtra("delete_toggle", false)){
+                mQuestionViewModel.deleteOne(question);
+
+            }else{
+                mQuestionViewModel.insert(question);
+            }
+        }else if (requestCode == NEW_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Question question = new Question();
             question.text = data.getStringExtra(NewQuestionActivity.EXTRA_REPLY);
             mQuestionViewModel.insert(question);
@@ -118,6 +129,8 @@ public class FragmentQuestions extends Fragment implements QuestionListAdapter.O
 
         Intent intent = new Intent(getActivity().getBaseContext(), EditQuestionActivity.class);
         intent.putExtra("questionId", mQuestionViewModel.getQuestions().getValue().get(position).questionId);
-        startActivity(intent);
+//        startActivity(intent, NEW_QUESTION_ACTIVITY_REQUEST_CODE);
+        startActivityForResult(intent, EDIT_QUESTION_ACTIVITY_REQUEST_CODE);
+
     }
 }

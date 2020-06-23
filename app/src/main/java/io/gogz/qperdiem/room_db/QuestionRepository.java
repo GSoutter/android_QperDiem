@@ -32,8 +32,14 @@ public class QuestionRepository {
         });
     }
 
-    public QuestionWithContexts getOneQuestionsWithContexts(long questionId) {
-        return mQuestionDao.getOneQuestionsWithContexts(questionId);
+    public void deleteOne(Question question) {
+        QuestionsRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mQuestionDao.deleteQuestion(question);
+        });
+    }
+
+    public LiveData<QuestionWithContexts> getOneQuestionWithContexts(long questionId) {
+        return mQuestionDao.getOneQuestionWithContexts(questionId);
     }
 }
 

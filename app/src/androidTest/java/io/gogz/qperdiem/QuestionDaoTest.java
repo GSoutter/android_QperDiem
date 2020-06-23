@@ -169,7 +169,7 @@ public class QuestionDaoTest {
         QuestionContextCrossRef questionContextCrossRef = new QuestionContextCrossRef(question.questionId, context.contextId);
         mQuestionContextCrossRefDao.insertOne(questionContextCrossRef);
 
-        QuestionWithContexts response = mQuestionDao.getOneQuestionsWithContexts(question.questionId);
+        QuestionWithContexts response = LiveDataTestUtil.getValue(mQuestionDao.getOneQuestionWithContexts(question.questionId));
 
 //        List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
         assertEquals(response.question.text, question.text);
