@@ -10,13 +10,15 @@ import java.util.List;
 import io.gogz.qperdiem.room_db.Question;
 import io.gogz.qperdiem.room_db.QuestionRepository;
 
-public class QuestionViewModel extends AndroidViewModel {
+
+
+public class QuestionWithContextViewModel extends AndroidViewModel {
 
     private QuestionRepository mRepository;
 
     private LiveData<List<Question>> mAllQuestions;
 
-    public QuestionViewModel (Application application) {
+    public QuestionWithContextViewModel (Application application) {
         super(application);
         this.mRepository = new QuestionRepository(application);
         mAllQuestions = mRepository.getQuestions();
