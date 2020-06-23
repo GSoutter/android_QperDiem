@@ -34,5 +34,9 @@ public interface QuestionDao {
     @Query("Select * from questions")
     public LiveData<List<QuestionWithContexts>> getQuestionsWithContexts();
 
+    @Transaction
+    @Query("Select * from questions WHERE questionId = :questionId")
+    public QuestionWithContexts getOneQuestionsWithContexts(long questionId);
+
 
 }

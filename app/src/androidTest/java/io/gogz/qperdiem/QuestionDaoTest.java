@@ -150,4 +150,30 @@ public class QuestionDaoTest {
         assertEquals(response.get(0).contexts.get(0).name, context.name);
 
     }
+
+    @Test
+    public void canGetOneQuestionWithContexts() throws Exception {
+        Question question = new Question();
+        question.text = "words";
+        question.questionId = mQuestionDao.insertQuestion(question);
+
+        Question question2 = new Question();
+        question2.text = "words2";
+        question2.questionId = mQuestionDao.insertQuestion(question2);
+
+        ContextQ context = new ContextQ();
+        context.name = "social";
+        context.contextId = mContextQDao.insertOne(context);
+
+
+        QuestionContextCrossRef questionContextCrossRef = new QuestionContextCrossRef(question.questionId, context.contextId);
+        mQuestionContextCrossRefDao.insertOne(questionContextCrossRef);
+
+        QuestionWithContexts response = mQuestionDao.getOneQuestionsWithContexts(question.questionId);
+
+//        List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
+        assertEquals(response.question.text, question.text);
+        assertEquals(response.contexts.get(0).name, context.name);
+
+    }
 }

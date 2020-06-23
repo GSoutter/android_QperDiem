@@ -31,5 +31,9 @@ public class QuestionRepository {
             mQuestionDao.insertQuestion(question);
         });
     }
+
+    public QuestionWithContexts getOneQuestionsWithContexts(long questionId) {
+        return mQuestionDao.getOneQuestionsWithContexts(questionId);
+    }
 }
 
