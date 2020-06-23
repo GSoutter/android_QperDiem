@@ -41,4 +41,9 @@ public class ContextRepository {
     public LiveData<List<ContextWithQuestions>> getAllContextWithQuestions() {
         return mDao.getContextsWithQuestions();
     }
+
+
+    public LiveData<ContextWithQuestions> getOneWithQuestions(long contextId) {
+        return mDao.getOneWithQuestions(contextId);
+    }
 }

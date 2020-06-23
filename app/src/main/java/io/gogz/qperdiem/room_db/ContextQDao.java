@@ -29,4 +29,8 @@ public interface ContextQDao {
     @Transaction
     @Query("Select * from contexts")
     public LiveData<List<ContextWithQuestions>> getContextsWithQuestions();
+
+    @Transaction
+    @Query("Select * from contexts WHERE contextId = :contextId")
+    public LiveData<ContextWithQuestions> getOneWithQuestions(long contextId);
 }
