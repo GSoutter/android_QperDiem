@@ -23,4 +23,5 @@
     <string name="title_add_ratings">Review</string>
     <string name="title_view_questions">Questions</string>
     <string name="title_view_contexts">Contexts</string>
+    <string name="button_delete">Delete</string>
 </resources>

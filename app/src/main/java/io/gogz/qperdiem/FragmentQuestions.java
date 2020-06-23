@@ -2,6 +2,7 @@ package io.gogz.qperdiem;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,9 +27,10 @@ import io.gogz.qperdiem.viewmodels.QuestionViewModel;
 
 import static android.app.Activity.RESULT_OK;
 
-public class FragmentQuestions extends Fragment {
+public class FragmentQuestions extends Fragment implements QuestionListAdapter.OnQuestionListener{
 
 
+    private static final String TAG = "FragmentQuestions";
     private QuestionViewModel mQuestionViewModel;
     public static final int NEW_QUESTION_ACTIVITY_REQUEST_CODE = 1;
 
@@ -38,7 +40,7 @@ public class FragmentQuestions extends Fragment {
         View view = inflater.inflate(R.layout.fragment_questions, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
-        final QuestionListAdapter adapter = new QuestionListAdapter(getActivity().getBaseContext());
+        final QuestionListAdapter adapter = new QuestionListAdapter(getActivity().getBaseContext(), this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
 
@@ -109,4 +111,13 @@ public class FragmentQuestions extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onQuestionClick(int position) {
+//        To get access to the not selected do below. I think this is not necessary as I can use the posistion
+        Log.d(TAG, "onQuestionClick: clicked");
+
+        Intent intent = new Intent(getActivity().getBaseContext(), EditQuestionActivity.class);
+        intent.putExtra("questionId", mQuestionViewModel.getQuestions().getValue().get(position).questionId);
+        startActivity(intent);
+    }
 }

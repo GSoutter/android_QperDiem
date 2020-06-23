@@ -15,24 +15,43 @@ import io.gogz.qperdiem.room_db.Question;
 
 public class QuestionListAdapter extends RecyclerView.Adapter<QuestionListAdapter.QuestionViewHolder> {
 
-    class QuestionViewHolder extends RecyclerView.ViewHolder {
-        private final TextView questionItemView;
 
-        private QuestionViewHolder(View itemView){
+    private OnQuestionListener mOnQuestionListener;
+
+    class QuestionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private final TextView questionItemView;
+        OnQuestionListener onQuestionListener;
+
+        private QuestionViewHolder(View itemView, OnQuestionListener onQuestionListener){
             super(itemView);
             questionItemView = itemView.findViewById(R.id.textView);
+            this.onQuestionListener = onQuestionListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onQuestionListener.onQuestionClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnQuestionListener{
+        void onQuestionClick(int position);
     }
 
     private final LayoutInflater mInflater;
     private List<Question> mQuestions;
 
-    public QuestionListAdapter(Context context) {mInflater = LayoutInflater.from(context);}
+    public QuestionListAdapter(Context context, OnQuestionListener onQuestionListener) {
+        mInflater = LayoutInflater.from(context);
+        this.mOnQuestionListener = onQuestionListener;
+    }
 
     @Override
     public QuestionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
-        return new QuestionViewHolder(itemView);
+        return new QuestionViewHolder(itemView, mOnQuestionListener);
     }
 
     @Override
