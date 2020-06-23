@@ -26,7 +26,7 @@ public interface ContextQDao {
     @Delete
     public void deleteOne(ContextQ context);
 
-//    @Transaction
-//    @Query("Select * from questions")
-//    public LiveData<List<QuestionWithRatings>> getQuestionsWithRatings();
+    @Transaction
+    @Query("Select * from contexts")
+    public LiveData<List<ContextWithQuestions>> getContextsWithQuestions();
 }

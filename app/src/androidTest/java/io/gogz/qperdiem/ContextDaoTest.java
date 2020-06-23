@@ -17,8 +17,12 @@ import java.util.List;
 
 import io.gogz.qperdiem.room_db.ContextQ;
 import io.gogz.qperdiem.room_db.ContextQDao;
+import io.gogz.qperdiem.room_db.ContextWithQuestions;
 import io.gogz.qperdiem.room_db.Question;
+import io.gogz.qperdiem.room_db.QuestionContextCrossRef;
+import io.gogz.qperdiem.room_db.QuestionContextCrossRefDao;
 import io.gogz.qperdiem.room_db.QuestionDao;
+import io.gogz.qperdiem.room_db.QuestionWithContexts;
 import io.gogz.qperdiem.room_db.QuestionsRoomDatabase;
 import io.gogz.qperdiem.room_db.RatingDao;
 
@@ -36,6 +40,8 @@ public class ContextDaoTest {
     private QuestionsRoomDatabase mDb;
     private RatingDao mRatingDao;
     private ContextQDao mContextQDao;
+    private QuestionContextCrossRefDao mQuestionContextCrossRefDao;
+
 
     @Before
     public void createDb() {
@@ -49,6 +55,8 @@ public class ContextDaoTest {
         mQuestionDao = mDb.questionDao();
         mRatingDao = mDb.ratingDao();
         mContextQDao = mDb.contextQDao();
+        mQuestionContextCrossRefDao = mDb.questionContextCrossRefDao();
+
     }
 
     @After
@@ -95,5 +103,42 @@ public class ContextDaoTest {
         mContextQDao.deleteAll();
         List<ContextQ> allWords = LiveDataTestUtil.getValue(mContextQDao.getAll());
         assertTrue(allWords.isEmpty());
+    }
+
+
+
+    @Test
+    public void canGetContextWithQuestions() throws Exception {
+        Question question = new Question();
+        question.text = "words";
+        question.questionId = mQuestionDao.insertQuestion(question);
+
+        Question question2 = new Question();
+        question2.text = "words2";
+        question2.questionId = mQuestionDao.insertQuestion(question2);
+
+        ContextQ context = new ContextQ();
+        context.name = "social";
+        context.contextId = mContextQDao.insertOne(context);
+
+        ContextQ context2 = new ContextQ();
+        context2.name = "work";
+        context2.contextId = mContextQDao.insertOne(context2);
+
+
+        QuestionContextCrossRef questionContextCrossRef = new QuestionContextCrossRef(question.questionId, context.contextId);
+        mQuestionContextCrossRefDao.insertOne(questionContextCrossRef);
+
+        questionContextCrossRef = new QuestionContextCrossRef(question2.questionId, context.contextId);
+        mQuestionContextCrossRefDao.insertOne(questionContextCrossRef);
+
+        List<ContextWithQuestions> response = LiveDataTestUtil.getValue(mContextQDao.getContextsWithQuestions());
+
+//        List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
+        assertEquals(response.get(0).context.name, context.name);
+        assertEquals(response.size(), 2);
+        assertEquals(response.get(0).questions.size(), 2);
+        assertEquals(response.get(0).questions.get(0).text, question.text);
+
     }
 }
