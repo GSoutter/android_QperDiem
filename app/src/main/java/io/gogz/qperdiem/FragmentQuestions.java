@@ -3,6 +3,8 @@ package io.gogz.qperdiem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -22,6 +24,8 @@ import io.gogz.qperdiem.adapters.QuestionListAdapter;
 import io.gogz.qperdiem.room_db.Question;
 import io.gogz.qperdiem.viewmodels.QuestionViewModel;
 
+import static android.app.Activity.RESULT_OK;
+
 public class FragmentQuestions extends Fragment {
 
 
@@ -31,16 +35,16 @@ public class FragmentQuestions extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_questions, container, false);
+        View view = inflater.inflate(R.layout.fragment_questions, container, false);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final QuestionListAdapter adapter = new QuestionListAdapter(this);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerview);
+        final QuestionListAdapter adapter = new QuestionListAdapter(getActivity().getBaseContext());
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
 
         mQuestionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
 
-        mQuestionViewModel.getQuestions().observe(this, new Observer<List<Question>>() {
+        mQuestionViewModel.getQuestions().observe(getViewLifecycleOwner(), new Observer<List<Question>>() {
             @Override
             public void onChanged(@Nullable final List<Question> questions) {
                 // Update the cached copy of the questions in the adapter.
@@ -49,11 +53,11 @@ public class FragmentQuestions extends Fragment {
         });
 
         // Floating Action Button coding
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NewQuestionActivity.class);
+                Intent intent = new Intent(getActivity().getBaseContext(), NewQuestionActivity.class);
                 startActivityForResult(intent, NEW_QUESTION_ACTIVITY_REQUEST_CODE);
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
@@ -62,11 +66,11 @@ public class FragmentQuestions extends Fragment {
 
 
 
-
+        return view;
 
     }
 
-
+//
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -76,9 +80,33 @@ public class FragmentQuestions extends Fragment {
             mQuestionViewModel.insert(question);
         } else {
             Toast.makeText(
-                    getApplicationContext(),
+                    getActivity().getBaseContext(),
                     R.string.empty_not_saved,
                     Toast.LENGTH_LONG).show();
         }
     }
+
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

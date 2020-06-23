@@ -49,33 +49,33 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new FragmentRatings()).commit();
 
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final QuestionListAdapter adapter = new QuestionListAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mQuestionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
-
-        mQuestionViewModel.getQuestions().observe(this, new Observer<List<Question>>() {
-            @Override
-            public void onChanged(@Nullable final List<Question> questions) {
-                // Update the cached copy of the questions in the adapter.
-                adapter.setQuestions(questions);
-            }
-        });
-
-        // Floating Action Button coding
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, NewQuestionActivity.class);
-                startActivityForResult(intent, NEW_QUESTION_ACTIVITY_REQUEST_CODE);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-            }
-        });
+//
+//        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+//        final QuestionListAdapter adapter = new QuestionListAdapter(this);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        mQuestionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+//
+//        mQuestionViewModel.getQuestions().observe(this, new Observer<List<Question>>() {
+//            @Override
+//            public void onChanged(@Nullable final List<Question> questions) {
+//                // Update the cached copy of the questions in the adapter.
+//                adapter.setQuestions(questions);
+//            }
+//        });
+//
+//        // Floating Action Button coding
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, NewQuestionActivity.class);
+//                startActivityForResult(intent, NEW_QUESTION_ACTIVITY_REQUEST_CODE);
+////                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+////                        .setAction("Action", null).show();
+//            }
+//        });
 
 
 //        Toolbar toolbar = findViewById(R.id.toolbar);
@@ -108,20 +108,20 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == NEW_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Question question = new Question();
-            question.text = data.getStringExtra(NewQuestionActivity.EXTRA_REPLY);
-            mQuestionViewModel.insert(question);
-        } else {
-            Toast.makeText(
-                    getApplicationContext(),
-                    R.string.empty_not_saved,
-                    Toast.LENGTH_LONG).show();
-        }
-    }
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == NEW_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+//            Question question = new Question();
+//            question.text = data.getStringExtra(NewQuestionActivity.EXTRA_REPLY);
+//            mQuestionViewModel.insert(question);
+//        } else {
+//            Toast.makeText(
+//                    getApplicationContext(),
+//                    R.string.empty_not_saved,
+//                    Toast.LENGTH_LONG).show();
+//        }
+//    }
 
 
 
