@@ -6,13 +6,13 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class ContextRepository {
+public class ContextQRepository {
 
     private ContextQDao mDao;
     private LiveData<List<ContextQ>> mAll;
 
 
-    public ContextRepository(Application application) {
+    public ContextQRepository(Application application) {
         QuestionsRoomDatabase db = QuestionsRoomDatabase.getDatabase(application);
         this.mDao = db.contextQDao();
         this.mAll = mDao.getAll();
