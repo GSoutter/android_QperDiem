@@ -44,7 +44,7 @@ public class EditContextQActivity extends AppCompatActivity {
 
         mContextQViewModel = new ViewModelProvider(this).get(ContextQViewModel.class);
 
-        ContextWithQuestions contextWithQuestions = mContextQViewModel.getOneWithQuestions(contextId).getValue();
+//        ContextWithQuestions contextWithQuestions = mContextQViewModel.getOneWithQuestions(contextId).getValue();
 
         mEditContextQView = findViewById(R.id.edit_context);
 
