@@ -12,6 +12,7 @@ import java.util.List;
 
 import io.gogz.qperdiem.R;
 import io.gogz.qperdiem.room_db.ContextQ;
+import io.gogz.qperdiem.room_db.ContextWithQuestions;
 
 public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapter.ContextQViewHolder> {
 
@@ -22,7 +23,7 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
         private final TextView contextQItemView;
         OnContextQListener mOnContextQListener;
 
-        private ContextViewHolder(View itemView, OnContextQListener mOnContextQListener){
+        private ContextQViewHolder(View itemView, OnContextQListener mOnContextQListener){
             super(itemView);
             contextQItemView = itemView.findViewById(R.id.textView);
             this.mOnContextQListener = mOnContextQListener;
@@ -32,7 +33,7 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
 
         @Override
         public void onClick(View view) {
-            onContextListener.onConextQClick(getAdapterPosition());
+            onContextQListener.onConextQClick(getAdapterPosition());
         }
     }
 
@@ -42,6 +43,7 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
 
     private final LayoutInflater mInflater;
     private List<ContextQ> mContextQs;
+    private List<ContextWithQuestions> mContextWithQs;
 
     public ContextQListAdapter(Context context, OnContextQListener onContextQListener) {
         mInflater = LayoutInflater.from(context);
@@ -64,6 +66,10 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
 
     public void setContextQs(List<ContextQ> contextQs){
         mContextQs = contextQs;
+        notifyDataSetChanged();
+    }
+    public void setContextWithQs(List<ContextWithQuestions> contextWithQs){
+        mContextWithQs = contextWithQs;
         notifyDataSetChanged();
     }
 
