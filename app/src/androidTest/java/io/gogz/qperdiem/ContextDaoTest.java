@@ -134,7 +134,6 @@ public class ContextDaoTest {
 
         List<ContextWithQuestions> response = LiveDataTestUtil.getValue(mContextQDao.getContextsWithQuestions());
 
-//        List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
         assertEquals(response.get(0).context.name, context.name);
         assertEquals(response.size(), 2);
         assertEquals(response.get(0).questions.size(), 2);

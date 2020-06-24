@@ -129,12 +129,6 @@ public class FragmentQuestions extends Fragment implements QuestionListAdapter.O
     }
 
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -153,12 +147,13 @@ public class FragmentQuestions extends Fragment implements QuestionListAdapter.O
 
     @Override
     public void onQuestionClick(int position) {
-//        To get access to the not selected do below. I think this is not necessary as I can use the posistion
+//        To get access to the question selected do below. I think this is not necessary as I can use the posistion
         Log.d(TAG, "onQuestionClick: clicked");
 
         Intent intent = new Intent(getActivity().getBaseContext(), EditQuestionActivity.class);
+
+        // TODO: work out a way to avoid making an additional call to db.
         intent.putExtra("questionId", mQuestionViewModel.getQuestions().getValue().get(position).questionId);
-//        startActivity(intent, NEW_QUESTION_ACTIVITY_REQUEST_CODE);
         startActivityForResult(intent, EDIT_QUESTION_ACTIVITY_REQUEST_CODE);
 
     }

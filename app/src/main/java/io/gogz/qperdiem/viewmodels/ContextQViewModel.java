@@ -10,9 +10,6 @@ import java.util.List;
 import io.gogz.qperdiem.room_db.ContextQ;
 import io.gogz.qperdiem.room_db.ContextQRepository;
 import io.gogz.qperdiem.room_db.ContextWithQuestions;
-import io.gogz.qperdiem.room_db.Question;
-import io.gogz.qperdiem.room_db.QuestionRepository;
-import io.gogz.qperdiem.room_db.QuestionWithContexts;
 
 public class ContextQViewModel extends AndroidViewModel {
 

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import io.gogz.qperdiem.R;
-import io.gogz.qperdiem.room_db.ContextQ;
 import io.gogz.qperdiem.room_db.ContextWithQuestions;
 
 public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapter.ContextQViewHolder> {
@@ -42,7 +41,7 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
     }
 
     private final LayoutInflater mInflater;
-//    private List<ContextQ> mContextQs;
+
     private List<ContextWithQuestions> mContextWithQs;
 
     public ContextQListAdapter(Context context, OnContextQListener onContextQListener) {
@@ -65,10 +64,6 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
         }
     }
 
-//    public void setContextQs(List<ContextQ> contextQs){
-//        mContextQs = contextQs;
-//        notifyDataSetChanged();
-//    }
 
     public void setContextWithQs(List<ContextWithQuestions> contextWithQs){
         mContextWithQs = contextWithQs;

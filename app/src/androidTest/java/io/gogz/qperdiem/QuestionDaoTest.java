@@ -118,7 +118,6 @@ public class QuestionDaoTest {
 
         List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
 
-//        List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
         assertEquals(allQuestionsWithRatings.get(0).question.text, question.text);
         assertEquals(allQuestionsWithRatings.get(0).ratings.get(0).score, rating.score, 0.1);
 
@@ -144,7 +143,6 @@ public class QuestionDaoTest {
 
         List<QuestionWithContexts> response = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithContexts());
 
-//        List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
         assertEquals(response.get(0).question.text, question.text);
         assertEquals(response.get(1).question.text, question2.text);
         assertEquals(response.get(0).contexts.get(0).name, context.name);
@@ -171,7 +169,6 @@ public class QuestionDaoTest {
 
         QuestionWithContexts response = LiveDataTestUtil.getValue(mQuestionDao.getOneQuestionWithContexts(question.questionId));
 
-//        List<QuestionWithRatings> allQuestionsWithRatings = LiveDataTestUtil.getValue(mQuestionDao.getQuestionsWithRatings());
         assertEquals(response.question.text, question.text);
         assertEquals(response.contexts.get(0).name, context.name);
 
