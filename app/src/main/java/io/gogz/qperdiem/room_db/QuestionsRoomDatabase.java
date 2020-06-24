@@ -14,7 +14,6 @@ import java.util.concurrent.Executors;
 @Database(entities = {Question.class, Rating.class, ContextQ.class, QuestionContextCrossRef.class}, version =1, exportSchema = false)
 public abstract class QuestionsRoomDatabase extends RoomDatabase {
 
-//    public abstract QuestionWithRatingsDao questionWithRatingsDao();
     public abstract QuestionDao questionDao();
     public abstract RatingDao ratingDao();
     public abstract ContextQDao contextQDao();
@@ -45,11 +44,8 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
 
-            // If you want to keep data through app restarts,
-            // comment out the following block
             databaseWriteExecutor.execute(() -> {
-                // Populate the database in the background.
-                // If you want to start with more words, just add them.
+
                 QuestionDao mQuestionDao = INSTANCE.questionDao();
                 mQuestionDao.deleteAll();
                 RatingDao rDao = INSTANCE.ratingDao();

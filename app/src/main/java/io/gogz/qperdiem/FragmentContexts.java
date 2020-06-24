@@ -58,15 +58,12 @@ public class FragmentContexts extends Fragment implements ContextQListAdapter.On
             }
         });
 
-        // Floating Action Button coding
         FloatingActionButton fab = view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity().getBaseContext(), NewContextQActivity.class);
                 startActivityForResult(intent, NEW_CONTEXT_ACTIVITY_REQUEST_CODE);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
 
@@ -97,26 +94,17 @@ public class FragmentContexts extends Fragment implements ContextQListAdapter.On
         } else {
             Toast.makeText(
                     getActivity().getBaseContext(),
-                    R.string.empty_not_saved,
+                    R.string.empty_not_saved_context,
                     Toast.LENGTH_LONG).show();
         }
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
@@ -126,12 +114,10 @@ public class FragmentContexts extends Fragment implements ContextQListAdapter.On
 
     @Override
     public void onContextQClick(int position) {
-//        To get access to the not selected do below. I think this is not necessary as I can use the posistion
         Log.d(TAG, "onContextClick: clicked");
 
         Intent intent = new Intent(getActivity().getBaseContext(), EditContextQActivity.class);
         intent.putExtra("contextId", mContextQViewModel.getAllContextWithQuestions().getValue().get(position).context.contextId);
-//        startActivity(intent, NEW_QUESTION_ACTIVITY_REQUEST_CODE);
         startActivityForResult(intent, EDIT_CONTEXT_ACTIVITY_REQUEST_CODE);
 
     }

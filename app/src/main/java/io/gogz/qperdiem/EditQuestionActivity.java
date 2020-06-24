@@ -57,7 +57,6 @@ public class EditQuestionActivity extends AppCompatActivity implements ContextQO
 
         mEditQuestionView = findViewById(R.id.edit_question);
 
-        List<ContextQ> contextQForQuestion;
 
         mQuestionViewModel.getOneQuestionWithContexts(questionId).observe(this, new Observer<QuestionWithContexts>() {
             @Override
@@ -105,12 +104,9 @@ public class EditQuestionActivity extends AppCompatActivity implements ContextQO
                             contextQOff += contexts.get(i).contextId + " ";
                         }
                     }
-
-//                    view.findViewById(R.id.recyclerview);
                     String questionText = mEditQuestionView.getText().toString();
                     Boolean deleteToggle = mDeleteToggle.isChecked();
 
-//                    replyIntent.putExtra(EXTRA_REPLY, questionText);
                     replyIntent.putExtra("questionText", questionText);
                     replyIntent.putExtra("questionId", questionId);
                     replyIntent.putExtra("delete_toggle", deleteToggle);

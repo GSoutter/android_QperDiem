@@ -69,8 +69,8 @@ public class ContextQOnlyListAdapter extends RecyclerView.Adapter<ContextQOnlyLi
         if(mContextQs != null) {
             ContextQ current = mContextQs.get(position);
             String text = current.name;
+
             holder.contextQItemView.setText(text);
-//            holder.contextQToggle.setChecked(true);
 
             if (mQuestionWithContext != null){
                 holder.contextQToggle.setChecked(mQuestionWithContext.containsContext(current));
