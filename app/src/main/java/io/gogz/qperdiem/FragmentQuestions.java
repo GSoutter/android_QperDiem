@@ -19,13 +19,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.gogz.qperdiem.adapters.QuestionListAdapter;
+import io.gogz.qperdiem.room_db.ContextQ;
 import io.gogz.qperdiem.room_db.Question;
+import io.gogz.qperdiem.room_db.QuestionContextCrossRef;
+import io.gogz.qperdiem.room_db.QuestionContextCrossRefDao;
 import io.gogz.qperdiem.viewmodels.QuestionViewModel;
 
 import static android.app.Activity.RESULT_OK;
+import static java.lang.Long.parseLong;
 
 public class FragmentQuestions extends Fragment implements QuestionListAdapter.OnQuestionListener{
 
@@ -80,12 +85,36 @@ public class FragmentQuestions extends Fragment implements QuestionListAdapter.O
         if (requestCode == EDIT_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Question question = new Question();
             question.text = data.getStringExtra("questionText");
-            question.questionId = data.getLongExtra("questionId", 0);
+            long questionId = data.getLongExtra("questionId", 0);
+            question.questionId = questionId;
+
+            String contextOnString = data.getStringExtra("context_on");
+            String contextOffString = data.getStringExtra("context_off");
+
+
+            assert contextOnString != null;
+            String[] contextOnIdArray = contextOnString.split(" ");
+            assert contextOffString != null;
+            String[] contextOffIdArray = contextOffString.split(" ");
+
+
             if (data.getBooleanExtra("delete_toggle", false)){
                 mQuestionViewModel.deleteOne(question);
 
             }else{
                 mQuestionViewModel.insert(question);
+
+                if (!contextOnIdArray[0].equals("")){
+                    for (String contextId : contextOnIdArray){
+                        mQuestionViewModel.insertOneQuestionContextCrossRef(new QuestionContextCrossRef(questionId, parseLong(contextId)));
+                    }
+                }
+                if (!contextOffIdArray[0].equals("")) {
+                    for (String contextId : contextOffIdArray) {
+                        mQuestionViewModel.deleteOneQuestionContextCrossRef(new QuestionContextCrossRef(questionId, parseLong(contextId)));
+                    }
+                }
+
             }
         }else if (requestCode == NEW_QUESTION_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             Question question = new Question();

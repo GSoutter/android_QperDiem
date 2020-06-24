@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import io.gogz.qperdiem.room_db.Question;
+import io.gogz.qperdiem.room_db.QuestionContextCrossRef;
 import io.gogz.qperdiem.room_db.QuestionRepository;
 import io.gogz.qperdiem.room_db.QuestionWithContexts;
 
@@ -34,6 +35,14 @@ public class QuestionViewModel extends AndroidViewModel {
 
     public void deleteOne(Question question) {
         mRepository.deleteOne(question);
+    }
+
+    public void insertOneQuestionContextCrossRef(QuestionContextCrossRef questionContextCrossRef) {
+        mRepository.insertOneQuestionContextCrossRef(questionContextCrossRef);
+    }
+
+    public void deleteOneQuestionContextCrossRef(QuestionContextCrossRef questionContextCrossRef) {
+        mRepository.deleteOneQuestionContextCrossRef(questionContextCrossRef);
     }
 
     public LiveData<QuestionWithContexts> getOneQuestionWithContexts(long questionId){

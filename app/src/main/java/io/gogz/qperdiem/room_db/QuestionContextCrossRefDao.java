@@ -22,8 +22,15 @@ public interface QuestionContextCrossRefDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public void insertOne(QuestionContextCrossRef questionContextCrossRef);
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void insertMany(List<QuestionContextCrossRef> questionContextCrossRefs);
+
     @Transaction
     @Delete
     public void deleteOne(QuestionContextCrossRef questionContextCrossRef);
+
+    @Transaction
+    @Delete
+    public void deleteMany(List<QuestionContextCrossRef> questionContextCrossRefs);
 
 }

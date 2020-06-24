@@ -15,4 +15,14 @@ public class QuestionWithContexts {
             associateBy = @Junction(QuestionContextCrossRef.class)
     )
     public List<ContextQ> contexts;
+
+
+    public boolean containsContext(ContextQ contextQ){
+        for (ContextQ context : this.contexts){
+            if (contextQ.contextId == context.contextId){
+                return true;
+            }
+        }
+        return false;
+    }
 }

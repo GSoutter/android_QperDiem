@@ -9,12 +9,14 @@ import java.util.List;
 public class QuestionRepository {
 
     private QuestionDao mQuestionDao;
+    private QuestionContextCrossRefDao mQuestionContextCrossRefDao;
     private LiveData<List<Question>> mAllQuestions;
 
 
     public QuestionRepository(Application application) {
         QuestionsRoomDatabase db = QuestionsRoomDatabase.getDatabase(application);
         this.mQuestionDao = db.questionDao();
+        this.mQuestionContextCrossRefDao = db.questionContextCrossRefDao();
         this.mAllQuestions = mQuestionDao.getQuestions();
     }
 
@@ -32,6 +34,18 @@ public class QuestionRepository {
         });
     }
 
+    public void insertOneQuestionContextCrossRef(QuestionContextCrossRef questionContextCrossRef) {
+        QuestionsRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mQuestionContextCrossRefDao.insertOne(questionContextCrossRef);
+        });
+    }
+
+    public void deleteOneQuestionContextCrossRef(QuestionContextCrossRef questionContextCrossRef) {
+        QuestionsRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mQuestionContextCrossRefDao.deleteOne(questionContextCrossRef);
+        });
+    }
+
     public void deleteOne(Question question) {
         QuestionsRoomDatabase.databaseWriteExecutor.execute(() -> {
             mQuestionDao.deleteQuestion(question);
@@ -41,5 +55,7 @@ public class QuestionRepository {
     public LiveData<QuestionWithContexts> getOneQuestionWithContexts(long questionId) {
         return mQuestionDao.getOneQuestionWithContexts(questionId);
     }
+
+
 }
 

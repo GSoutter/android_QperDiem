@@ -1,10 +1,12 @@
 package io.gogz.qperdiem.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,36 +15,53 @@ import java.util.List;
 
 import io.gogz.qperdiem.R;
 import io.gogz.qperdiem.room_db.ContextQ;
-import io.gogz.qperdiem.room_db.ContextWithQuestions;
+import io.gogz.qperdiem.room_db.QuestionWithContexts;
 
 public class ContextQOnlyListAdapter extends RecyclerView.Adapter<ContextQOnlyListAdapter.ContextQOnlyViewHolder> {
 
 
+    private static final String TAG = "ContextQOnlyListAdapter";
+    private OnContextToggleListener mOnContextToggleListener;
 
-    class ContextQOnlyViewHolder extends RecyclerView.ViewHolder {
+
+    class ContextQOnlyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
         private final TextView contextQItemView;
+        private final ToggleButton contextQToggle;
+        OnContextToggleListener onContextToggleListener;
 
-        private ContextQOnlyViewHolder(View itemView){
+        private ContextQOnlyViewHolder(View itemView, OnContextToggleListener onContextToggleListener){
             super(itemView);
             contextQItemView = itemView.findViewById(R.id.textViewRecy);
+            contextQToggle = itemView.findViewById(R.id.toggleButtonRecy);
+
+            this.onContextToggleListener = onContextToggleListener;
         }
+
+        public void onClick(View view) {
+            onContextToggleListener.onContextToggleClick(getAdapterPosition());
+        }
+
 
     }
 
+    public interface OnContextToggleListener {
+        void onContextToggleClick(int position);
+    }
 
 
     private final LayoutInflater mInflater;
     private List<ContextQ> mContextQs;
-//    private List<ContextWithQuestions> mContextWithQs;
+    private QuestionWithContexts mQuestionWithContext;
 
-    public ContextQOnlyListAdapter(Context context) {
+    public ContextQOnlyListAdapter(Context context, OnContextToggleListener onContextListener) {
         mInflater = LayoutInflater.from(context);
+        this.mOnContextToggleListener = onContextListener;
     }
 
     @Override
     public ContextQOnlyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.recyclerview_question_contexts_edit, parent, false);
-        return new ContextQOnlyViewHolder(itemView);
+        return new ContextQOnlyViewHolder(itemView, mOnContextToggleListener);
     }
 
     @Override
@@ -51,6 +70,12 @@ public class ContextQOnlyListAdapter extends RecyclerView.Adapter<ContextQOnlyLi
             ContextQ current = mContextQs.get(position);
             String text = current.name;
             holder.contextQItemView.setText(text);
+//            holder.contextQToggle.setChecked(true);
+
+            if (mQuestionWithContext != null){
+                holder.contextQToggle.setChecked(mQuestionWithContext.containsContext(current));
+
+            }
         }
     }
 
@@ -59,10 +84,11 @@ public class ContextQOnlyListAdapter extends RecyclerView.Adapter<ContextQOnlyLi
         notifyDataSetChanged();
     }
 
-//    public void setContextWithQs(List<ContextWithQuestions> contextWithQs){
-//        mContextWithQs = contextWithQs;
-//        notifyDataSetChanged();
-//    }
+    public void setQuestionWithContext(QuestionWithContexts contextWithQs){
+        Log.d(TAG, "setQuestionWithContext: ");
+        mQuestionWithContext = contextWithQs;
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount(){
