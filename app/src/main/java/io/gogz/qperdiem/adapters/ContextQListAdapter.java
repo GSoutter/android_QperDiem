@@ -21,19 +21,19 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
 
     class ContextQViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView contextQItemView;
-        OnContextQListener mOnContextQListener;
+        OnContextQListener onContextQListener;
 
-        private ContextQViewHolder(View itemView, OnContextQListener mOnContextQListener){
+        private ContextQViewHolder(View itemView, OnContextQListener onContextQListener){
             super(itemView);
             contextQItemView = itemView.findViewById(R.id.textView);
-            this.mOnContextQListener = mOnContextQListener;
+            this.onContextQListener = onContextQListener;
 
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            onContextQListener.onConextQClick(getAdapterPosition());
+            onContextQListener.onContextQClick(getAdapterPosition());
         }
     }
 
@@ -42,7 +42,7 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
     }
 
     private final LayoutInflater mInflater;
-    private List<ContextQ> mContextQs;
+//    private List<ContextQ> mContextQs;
     private List<ContextWithQuestions> mContextWithQs;
 
     public ContextQListAdapter(Context context, OnContextQListener onContextQListener) {
@@ -58,16 +58,18 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
 
     @Override
     public void onBindViewHolder(ContextQViewHolder holder, int position){
-        if(mContextQs != null) {
-            ContextQ current = mContextQs.get(position);
-            holder.contextQItemView.setText(current.name);
+        if(mContextWithQs != null) {
+            ContextWithQuestions current = mContextWithQs.get(position);
+            String text = current.context.name + "  [" + current.questions.size() + "q]";
+            holder.contextQItemView.setText(text);
         }
     }
 
-    public void setContextQs(List<ContextQ> contextQs){
-        mContextQs = contextQs;
-        notifyDataSetChanged();
-    }
+//    public void setContextQs(List<ContextQ> contextQs){
+//        mContextQs = contextQs;
+//        notifyDataSetChanged();
+//    }
+
     public void setContextWithQs(List<ContextWithQuestions> contextWithQs){
         mContextWithQs = contextWithQs;
         notifyDataSetChanged();
@@ -75,8 +77,8 @@ public class ContextQListAdapter extends RecyclerView.Adapter<ContextQListAdapte
 
     @Override
     public int getItemCount(){
-        if (mContextQs != null)
-            return mContextQs.size();
+        if (mContextWithQs != null)
+            return mContextWithQs.size();
         else return 0;
     }
 

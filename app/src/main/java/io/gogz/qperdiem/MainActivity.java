@@ -32,8 +32,8 @@ import io.gogz.qperdiem.viewmodels.QuestionViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private QuestionViewModel mQuestionViewModel;
-    public static final int NEW_QUESTION_ACTIVITY_REQUEST_CODE = 1;
+//    private QuestionViewModel mQuestionViewModel;
+//    public static final int NEW_QUESTION_ACTIVITY_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -82,7 +82,7 @@ public class FragmentContexts extends Fragment implements ContextQListAdapter.On
 
         if (requestCode == EDIT_CONTEXT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             ContextQ contextQ = new ContextQ();
-            contextQ.name = data.getStringExtra("contextName");
+            contextQ.name = data.getStringExtra("contextQName");
             contextQ.contextId = data.getLongExtra("contextId", 0);
             if (data.getBooleanExtra("delete_toggle", false)){
                 mContextQViewModel.deleteOne(contextQ);
@@ -90,7 +90,7 @@ public class FragmentContexts extends Fragment implements ContextQListAdapter.On
             }else{
                 mContextQViewModel.insert(contextQ);
             }
-        }else if (requestCode == EDIT_CONTEXT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+        }else if (requestCode == NEW_CONTEXT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             ContextQ contextQ = new ContextQ();
             contextQ.name = data.getStringExtra(NewQuestionActivity.EXTRA_REPLY);
             mContextQViewModel.insert(contextQ);
@@ -101,7 +101,6 @@ public class FragmentContexts extends Fragment implements ContextQListAdapter.On
                     Toast.LENGTH_LONG).show();
         }
     }
-
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,7 +130,7 @@ public class FragmentContexts extends Fragment implements ContextQListAdapter.On
         Log.d(TAG, "onContextClick: clicked");
 
         Intent intent = new Intent(getActivity().getBaseContext(), EditContextQActivity.class);
-        intent.putExtra("questionId", mContextQViewModel.getAllContextWithQuestions().getValue().get(position).context.contextId));
+        intent.putExtra("contextId", mContextQViewModel.getAllContextWithQuestions().getValue().get(position).context.contextId);
 //        startActivity(intent, NEW_QUESTION_ACTIVITY_REQUEST_CODE);
         startActivityForResult(intent, EDIT_CONTEXT_ACTIVITY_REQUEST_CODE);
 

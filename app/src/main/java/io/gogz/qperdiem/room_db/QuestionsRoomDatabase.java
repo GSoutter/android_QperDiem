@@ -108,12 +108,12 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
                 context3.contextId = mContextQDao.insertOne(context3);
 
                 ContextQ context4 = new ContextQ();
-                context3.name = "evening";
-                context3.contextId = mContextQDao.insertOne(context4);
+                context4.name = "evening";
+                context4.contextId = mContextQDao.insertOne(context4);
 
                 ContextQ context5 = new ContextQ();
-                context3.name = "weekend";
-                context3.contextId = mContextQDao.insertOne(context5);
+                context5.name = "weekend";
+                context5.contextId = mContextQDao.insertOne(context5);
 
                 QuestionContextCrossRef questionContextCrossRef = new QuestionContextCrossRef(question.questionId, context3.contextId);
                 mQuestionContextCrossRefDao.insertOne(questionContextCrossRef);

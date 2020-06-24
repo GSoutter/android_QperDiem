@@ -22,6 +22,8 @@
         </activity>
         <activity android:name=".NewQuestionActivity" />
         <activity android:name=".EditQuestionActivity" />
+        <activity android:name=".EditContextQActivity" />
+        <activity android:name=".NewContextQActivity" />
     </application>
 
 </manifest>
