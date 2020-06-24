@@ -16,18 +16,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import io.gogz.qperdiem.room_db.ContextQ;
 import io.gogz.qperdiem.room_db.ContextWithQuestions;
-import io.gogz.qperdiem.room_db.Question;
-import io.gogz.qperdiem.room_db.QuestionWithContexts;
 import io.gogz.qperdiem.viewmodels.ContextQViewModel;
-import io.gogz.qperdiem.viewmodels.QuestionViewModel;
 
 public class EditContextQActivity extends AppCompatActivity {
 
     private static final String TAG = "EditContext Activity";
     private EditText mEditContextQView;
     private ToggleButton mDeleteToggle;
-//    public static final String QUESTION_TEXT = "com.example.android.wordlistsql.REPLY";
-//    public static final String QUESTION_ID = "com.example.android.wordlistsql.REPLY";
 
     private ContextQViewModel mContextQViewModel;
 
@@ -37,20 +32,12 @@ public class EditContextQActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_context);
 
-//        final QuestionListAdapter adapter = new QuestionListAdapter(this, this);
-
-//        Intent intent = getIntent();
         long contextId = getIntent().getLongExtra("contextId", 0);
 
         mContextQViewModel = new ViewModelProvider(this).get(ContextQViewModel.class);
 
-//        ContextWithQuestions contextWithQuestions = mContextQViewModel.getOneWithQuestions(contextId).getValue();
-
         mEditContextQView = findViewById(R.id.edit_context);
 
-
-        ContextQ contextQ = new ContextQ();
-//        mEditQuestionView.setText(questionWithContexts.question.text);
 
         mContextQViewModel.getOneWithQuestions(contextId).observe(this, new Observer<ContextWithQuestions>() {
             @Override
