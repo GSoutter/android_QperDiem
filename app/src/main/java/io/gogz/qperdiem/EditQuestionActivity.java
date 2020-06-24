@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ToggleButton;
@@ -13,13 +15,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import io.gogz.qperdiem.adapters.ContextQOnlyListAdapter;
 import io.gogz.qperdiem.adapters.QuestionListAdapter;
+import io.gogz.qperdiem.room_db.ContextQ;
 import io.gogz.qperdiem.room_db.Question;
 import io.gogz.qperdiem.room_db.QuestionWithContexts;
 import io.gogz.qperdiem.room_db.QuestionWithRatings;
+import io.gogz.qperdiem.viewmodels.ContextQViewModel;
 import io.gogz.qperdiem.viewmodels.QuestionViewModel;
 
 public class EditQuestionActivity extends AppCompatActivity {
@@ -27,45 +34,47 @@ public class EditQuestionActivity extends AppCompatActivity {
     private static final String TAG = "EditQuestion Activity";
     private EditText mEditQuestionView;
     private ToggleButton mDeleteToggle;
-//    public static final String QUESTION_TEXT = "com.example.android.wordlistsql.REPLY";
-//    public static final String QUESTION_ID = "com.example.android.wordlistsql.REPLY";
 
     private QuestionViewModel mQuestionViewModel;
-
+    private ContextQViewModel mContextQViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_question);
 
-//        final QuestionListAdapter adapter = new QuestionListAdapter(this, this);
-
-        Intent intent = getIntent();
         long questionId = getIntent().getLongExtra("questionId", 0);
 
         mQuestionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
 
-//        QuestionWithContexts questionWithContexts = mQuestionViewModel.getOneQuestionWithContexts(questionId).getValue();
-
         mEditQuestionView = findViewById(R.id.edit_question);
-
-
-        Question question = new Question();
-//        mEditQuestionView.setText(questionWithContexts.question.text);
 
         mQuestionViewModel.getOneQuestionWithContexts(questionId).observe(this, new Observer<QuestionWithContexts>() {
             @Override
             public void onChanged(@Nullable final QuestionWithContexts questionWithContexts) {
-                // Update the cached copy of the questions in the adapter.
                 if (questionWithContexts != null){
                     mEditQuestionView.setText(questionWithContexts.question.text);
                 }
             }
         });
 
-        Log.d(TAG, "onCreate: ");
 
-        mEditQuestionView = findViewById(R.id.edit_question);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        final ContextQOnlyListAdapter adapter = new ContextQOnlyListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mContextQViewModel = new ViewModelProvider(this).get(ContextQViewModel.class);
+
+        mContextQViewModel.getAllContexts().observe(this, new Observer<List<ContextQ>>() {
+            @Override
+            public void onChanged(@Nullable final List<ContextQ> contextQAll) {
+                // Update the cached copy of the contexts in the adapter.
+                    adapter.setContextQs(contextQAll);
+            }
+        });
+
+
         mDeleteToggle = findViewById(R.id.toggleButton);
 
         final Button button = findViewById(R.id.button_save);

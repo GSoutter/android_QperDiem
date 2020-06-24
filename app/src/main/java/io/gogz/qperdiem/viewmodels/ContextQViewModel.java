@@ -20,15 +20,22 @@ public class ContextQViewModel extends AndroidViewModel {
 
     private LiveData<List<ContextWithQuestions>> mAllContextsWithRatings;
 
+    private LiveData<List<ContextQ>> mAllContexts;
+
     public ContextQViewModel (Application application) {
         super(application);
         this.mRepository = new ContextQRepository(application);
         mAllContextsWithRatings = mRepository.getAllContextWithQuestions();
+        mAllContexts = mRepository.getAllContexts();
 
     }
 
     public LiveData<List<ContextWithQuestions>> getAllContextWithQuestions() {
         return mAllContextsWithRatings;
+    }
+
+    public LiveData<List<ContextQ>> getAllContexts() {
+        return mAllContexts;
     }
 
     public void insert(ContextQ entry) {

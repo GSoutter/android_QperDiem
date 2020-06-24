@@ -46,4 +46,8 @@ public class ContextQRepository {
     public LiveData<ContextWithQuestions> getOneWithQuestions(long contextId) {
         return mDao.getOneWithQuestions(contextId);
     }
+
+    public LiveData<List<ContextQ>> getAllContexts() {
+        return mAll;
+    }
 }
