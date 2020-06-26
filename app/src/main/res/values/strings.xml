@@ -26,4 +26,5 @@
     <string name="title_view_contexts">Contexts</string>
     <string name="button_delete">Delete</string>
     <string name="hint_context">work</string>
+    <string name="notification_test">Notification test</string>
 </resources>

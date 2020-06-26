@@ -24,6 +24,7 @@
         <activity android:name=".EditQuestionActivity" />
         <activity android:name=".EditContextQActivity" />
         <activity android:name=".NewContextQActivity" />
+        <receiver android:name=".NotificationContextQuestions"/>
     </application>
 
 </manifest>

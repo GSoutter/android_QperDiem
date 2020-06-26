@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/notification_test"
+        android:orderInCategory="100"
+        android:title="@string/notification_test"
+        app:showAsAction="never" />
 </menu>
