@@ -109,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.notification_settings) {
+            Intent intent = new Intent(MainActivity.this, NotificationSettings.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

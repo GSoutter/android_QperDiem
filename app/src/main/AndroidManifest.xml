@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.gogz.qperdiem" >
+    package="io.gogz.qperdiem">
 
     <application
         android:allowBackup="true"
@@ -8,10 +8,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SettingsTest"
+            android:label="@string/title_activity_settings_test"></activity>
+        <activity
+            android:name=".NotificationSettings"
+            android:label="@string/title_activity_noftication_settings" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
 
             <!-- android:theme="@style/AppTheme.NoActionBar"> -->
             <intent-filter>
@@ -24,7 +30,8 @@
         <activity android:name=".EditQuestionActivity" />
         <activity android:name=".EditContextQActivity" />
         <activity android:name=".NewContextQActivity" />
-        <receiver android:name=".NotificationContextQuestions"/>
+
+        <receiver android:name=".NotificationContextQuestions" />
     </application>
 
 </manifest>

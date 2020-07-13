@@ -10,6 +10,7 @@ import androidx.core.app.NotificationManagerCompat;
 public class NotificationContextQuestions extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+//        Strng messsage =
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyQperDiem")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("@Evening try to:")
