@@ -1,6 +1,9 @@
 package io.gogz.qperdiem;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,22 +15,18 @@ public class NotificationSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.settings, new SettingsFragment())
-//                .commit();
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//        }
 
+
+        final Button button = findViewById(R.id.button_save);
+        button.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                Toast.makeText(
+                        NotificationSettings.this,
+                        R.string.settings_saved,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
-//    public static class SettingsFragment extends PreferenceFragmentCompat {
-//        @Override
-//        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-//            setPreferencesFromResource(R.xml.root_preferences, rootKey);
-//        }
-//    }
 }

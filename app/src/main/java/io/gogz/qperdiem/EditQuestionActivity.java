@@ -82,7 +82,7 @@ public class EditQuestionActivity extends AppCompatActivity implements ContextQO
 
         mDeleteToggle = findViewById(R.id.toggleButton);
         RecyclerView mRecycleView = findViewById(R.id.recyclerview);
-        ;
+
 
 
         final Button button = findViewById(R.id.button_save);
