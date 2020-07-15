@@ -120,7 +120,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ToggleButton
-                android:id="@+id/toggleButton"
+                android:id="@+id/toggleButtonNotificationOnOff"
                 android:layout_width="54dp"
                 android:layout_height="38dp"
                 android:layout_marginStart="16dp"
