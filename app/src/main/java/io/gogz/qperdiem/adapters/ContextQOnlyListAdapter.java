@@ -23,6 +23,10 @@ public class ContextQOnlyListAdapter extends RecyclerView.Adapter<ContextQOnlyLi
     private static final String TAG = "ContextQOnlyListAdapter";
     private OnContextToggleListener mOnContextToggleListener;
 
+    public ContextQOnlyListAdapter(Context context, OnContextToggleListener onContextListener) {
+        mInflater = LayoutInflater.from(context);
+        this.mOnContextToggleListener = onContextListener;
+    }
 
     class ContextQOnlyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener {
         private final TextView contextQItemView;
@@ -53,10 +57,6 @@ public class ContextQOnlyListAdapter extends RecyclerView.Adapter<ContextQOnlyLi
     private List<ContextQ> mContextQs;
     private QuestionWithContexts mQuestionWithContext;
 
-    public ContextQOnlyListAdapter(Context context, OnContextToggleListener onContextListener) {
-        mInflater = LayoutInflater.from(context);
-        this.mOnContextToggleListener = onContextListener;
-    }
 
     @Override
     public ContextQOnlyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

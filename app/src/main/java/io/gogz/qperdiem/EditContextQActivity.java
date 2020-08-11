@@ -51,7 +51,7 @@ public class EditContextQActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate: ");
 
-        mEditContextQView = findViewById(R.id.edit_context);
+        mEditContextQView = findViewById(R.id.edit_context);  // comment this out
         mDeleteToggle = findViewById(R.id.toggleButton);
 
         final Button button = findViewById(R.id.button_save);

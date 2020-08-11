@@ -11,4 +11,9 @@ public class ContextQ {
     //  List<Question> is moved to separate entity
     public boolean active;
 
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
