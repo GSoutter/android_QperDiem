@@ -71,6 +71,7 @@ public class ContextDaoTest {
         mContextQDao.insertOne(context);
         List<ContextQ> allWords = LiveDataTestUtil.getValue(mContextQDao.getAll());
         assertEquals(allWords.get(0).name, context.name);
+        assertEquals(allWords.get(0).contextId, 1);
     }
 
     @Test

@@ -26,6 +26,7 @@ import io.gogz.qperdiem.viewmodels.ContextQViewModel;
 public class NotificationSettings extends AppCompatActivity {
     private Spinner mSpinner;
     private ContextQViewModel mContextQViewModel;
+    private ContextQ mContextQSelected;
 
 
 
@@ -38,15 +39,14 @@ public class NotificationSettings extends AppCompatActivity {
         SharedPreferences sharedPrefs = getApplicationContext().getSharedPreferences("QperDiemPrefs", MODE_PRIVATE); // 0 - for private mode
         SharedPreferences.Editor sharedPrefsEditor = sharedPrefs.edit();
 
-        mSpinner = findViewById(R.id.context_spinner);
-
-        List<ContextQ> contextQs = new ArrayList<>();
-
         boolean contextOn = sharedPrefs.getBoolean("contextNotificationOn", false);
+        long contextId = sharedPrefs.getLong("contextIdNotification", 0);
+
+        mSpinner = findViewById(R.id.context_spinner);
+        List<ContextQ> contextQs = new ArrayList<>();
 
         ArrayAdapter<ContextQ> adapter = new ArrayAdapter<ContextQ>(this, android.R.layout.simple_spinner_item, contextQs);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         mSpinner.setAdapter(adapter);
 
         mContextQViewModel = new ViewModelProvider(this).get(ContextQViewModel.class);
@@ -57,6 +57,9 @@ public class NotificationSettings extends AppCompatActivity {
                 contextQs.clear();
                 assert contextQAll != null;
                 contextQs.addAll(contextQAll);
+                adapter.notifyDataSetChanged();
+
+                mSpinner.setSelection(findIndexOfContextQInList(contextId, contextQs));
             }
         });
 
@@ -64,6 +67,8 @@ public class NotificationSettings extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // TODO: complete method actions
+//                mContextQSelected = (ContextQ) parent.getSelectedItem();
+
             }
 
             @Override
@@ -71,7 +76,6 @@ public class NotificationSettings extends AppCompatActivity {
                 // TODO: complete method actions
             }
         }));
-
 
 
 
@@ -85,18 +89,27 @@ public class NotificationSettings extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
 
-
+                mContextQSelected = (ContextQ) mSpinner.getSelectedItem();
                 sharedPrefsEditor.putBoolean("contextNotificationOn", toggleButtonNotificationOnOff.isChecked());
+                sharedPrefsEditor.putLong("contextIdNotification", mContextQSelected.contextId);
                 sharedPrefsEditor.apply();
-
 
                 Toast.makeText(
                         NotificationSettings.this,
-                        R.string.settings_saved,
+                        R.string.settings_saved + " " + mContextQSelected.name,
                         Toast.LENGTH_LONG).show();
             }
         });
 
     }
+
+    public int findIndexOfContextQInList(long contextQId, List<ContextQ> contextQs ){
+        for (int i = 0; i < contextQs.size(); i++) {
+            if (contextQId == contextQs.get(i).contextId){
+                return i;
+            }
+        }
+        return 0; // default position if contextQ has been deleted from db.
+    };
 
 }
