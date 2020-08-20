@@ -36,7 +36,8 @@ public class NotificationSettings extends AppCompatActivity {
         setContentView(R.layout.settings_activity);
 
 
-        SharedPreferences sharedPrefs = getApplicationContext().getSharedPreferences("QperDiemPrefs", MODE_PRIVATE); // 0 - for private mode
+        SharedPreferences sharedPrefs = getApplicationContext().getSharedPreferences(
+                                                    "QperDiemPrefs", MODE_PRIVATE); // 0 - for private mode
         SharedPreferences.Editor sharedPrefsEditor = sharedPrefs.edit();
 
         boolean contextOn = sharedPrefs.getBoolean("contextNotificationOn", false);
@@ -45,7 +46,8 @@ public class NotificationSettings extends AppCompatActivity {
         mSpinner = findViewById(R.id.context_spinner);
         List<ContextQ> contextQs = new ArrayList<>();
 
-        ArrayAdapter<ContextQ> adapter = new ArrayAdapter<ContextQ>(this, android.R.layout.simple_spinner_item, contextQs);
+        ArrayAdapter<ContextQ> adapter = new ArrayAdapter<ContextQ>(this,
+                android.R.layout.simple_spinner_item, contextQs);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSpinner.setAdapter(adapter);
 
@@ -63,26 +65,9 @@ public class NotificationSettings extends AppCompatActivity {
             }
         });
 
-        mSpinner.setOnItemSelectedListener((new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // TODO: complete method actions
-//                mContextQSelected = (ContextQ) parent.getSelectedItem();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // TODO: complete method actions
-            }
-        }));
-
-
 
         final ToggleButton toggleButtonNotificationOnOff = findViewById(R.id.toggleButtonNotificationOnOff);
-
         toggleButtonNotificationOnOff.setChecked(contextOn);
-
 
         final Button button = findViewById(R.id.button_save);
 
