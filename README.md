@@ -6,9 +6,11 @@ A daily questions android app. Using native Java, Android Room to link to SQLite
 > Setting and asking daily questions is a method popularised by Marshall Goldsmith. In essence you write down a list of questions for yourself starting with the phrase “did i do my best to…”, you refer to them throughout the day as a reminder and at the end of each day you score each one based on the effort you put into it.
 I have set out to develop this app to help with this. 
 
-| Questions Page | Edit Questions | Contexts Page |
+## Screenshots
+
+| Questions Page | Contexts Page | Edit Questions Page |
 | :---:         |     :---:      |          :---: |
-| <img src="./docs/questions_page.png" width="100" />   | <img src="./docs/contexts_page.png" width="100" />     | <img src="./docs/edit_question_page.png" width="100" />    |
+| <img src="./docs/questions_page.png" width="250" />   | <img src="./docs/contexts_page.png" width="250" />     | <img src="./docs/edit_question_page.png" width="250" />    |
 
 ## Status
 > The project is still a work in progress, users can add questions and contexts and link questions to contexts
