@@ -69,7 +69,7 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
                 question3.questionId = mQuestionDao.insertQuestion(question3);
 
                 Question question4 = new Question();
-                question4.text = "Limit reddit and news";
+                question4.text = "Limit news and social media";
                 question4.questionId = mQuestionDao.insertQuestion(question4);
 
                 Question question5 = new Question();
